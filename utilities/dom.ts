@@ -52,3 +52,9 @@ export function addEscKeyListener(listener: () => any) {
         })
     })
 }
+
+export function getCsrfToken(): string {
+    return _.once('get-csrf-token', () => {
+        return (window.document.querySelector('meta[name="csrf-token"]') as any)?.content
+    })
+}

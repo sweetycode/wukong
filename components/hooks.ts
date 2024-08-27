@@ -1,5 +1,13 @@
+import { httpGet } from "@wukong/utilities/http"
 import { addEscKeyListener } from "../utilities/dom"
-import { useState, type Dispatch, type StateUpdater } from "preact/hooks"
+import { useEffect, useState, type Dispatch, type Inputs, type StateUpdater } from "preact/hooks"
+
+
+export function usePageTitle(title: string) {
+    useEffect(() => {
+        document.title = title
+    }, [])
+}
 
 
 export function useErrorCaptureState<T>(): [Error|null, (fn: () => T) => (T|null), (promise: Promise<T>) => Promise<T|void>] {
@@ -49,4 +57,17 @@ export function useFullscreenToggleState(initialState: boolean|(() => boolean) =
             return newValue
         })
     ]
+}
+
+
+export function useHttpGet(url: string, callback: (body: Object) => any, inputs: Inputs = []) {
+    useEffect(() => {
+        httpGet(url).then(callback)
+    }, inputs)
+}
+
+export function useHttpBody<T>(url: string, initialState: T|(()=>T), inputs: Inputs): T {
+    const [value, setValue] = useState<T>(initialState)
+    useHttpGet(url, setValue, inputs)
+    return value
 }

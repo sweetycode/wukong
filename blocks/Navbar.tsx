@@ -1,7 +1,16 @@
-import type { SimpleLink } from "@wukong/components/types";
-import type { ComponentChildren } from "preact";
+import { ComponentChild, ComponentChildren } from "preact";
+import Link2 from "../components/Link2";
 
-export default function Navbar({links, children}: {links: SimpleLink[], children?: ComponentChildren}) {
+export interface NavbarLink {
+    text: string
+    href: string
+}
+
+export function Navbar({name, links, logo}: {
+    name: string,
+    links: NavbarLink[],
+    logo: ComponentChild,
+}) {
     return <nav className="max-w-4xl p-4 mx-auto flex max-md:flex-wrap justify-between">
         {/* toggle button */}
         <div className="flex md:hidden">
@@ -11,18 +20,16 @@ export default function Navbar({links, children}: {links: SimpleLink[], children
                 </svg>
             </button>
         </div>
-        {/* logo */}
-        <a href="/" className="flex items-center space-x-2">
-            {/* TODO */}
-            {children}
-            <span class="text-2xl font-semibold whitespace-nowrap">JSToolX</span>
-        </a>
+        <Link2 href="/" className="flex items-center space-x-2">
+            {logo}
+            <span class="text-2xl font-semibold whitespace-nowrap">{name}</span>
+        </Link2>
 
         {/* nav items */}
         <div className="md:flex items-center max-md:w-full max-md:order-3">
             <ul className="flex max-md:flex-col md:items-center font-medium md:space-x-8 max-md:mt-4 max-md:p-4 max-md:rounded-lg max-md:border max-md:border-gray-100">
                 {links.map(({text, href}) => <li>
-                    <a href={href} className="block md:hover:text-blue-700 max-md:py-2 max-md:px-3 max-md:rounded max-md:hover:bg-gray-100">{text}</a>
+                    <Link2 href={href} className="block md:hover:text-blue-700 max-md:py-2 max-md:px-3 max-md:rounded max-md:hover:bg-gray-100">{text}</Link2>
                 </li>)}
             </ul>
         </div>

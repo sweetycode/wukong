@@ -9,8 +9,8 @@ export async function injectTippyScripts() {
 }
 
 export default function TooltipButton({children, tooltip, className, onClick}: {
-    children: ComponentChildren, 
-    tooltip: string, 
+    children: ComponentChildren,
+    tooltip: string,
     className?: string,
     onClick?: Function,
 }) {
@@ -21,7 +21,6 @@ export default function TooltipButton({children, tooltip, className, onClick}: {
             instanceRef.current = window['tippy'](ref.current, {content: tooltip})
         })
         return () => {
-            console.log(instanceRef.current)
             if (instanceRef.current) {
                 instanceRef.current.destroy()
                 instanceRef.current = null
@@ -34,7 +33,7 @@ export default function TooltipButton({children, tooltip, className, onClick}: {
             instanceRef.current.setContent(tooltip)
         }
     }, [tooltip])
-    
+
     return <button className={className} ref={ref} onClick={onClick as any}>
         {children}
     </button>

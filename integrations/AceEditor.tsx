@@ -8,13 +8,14 @@ export async function injectAceScripts() {
 }
 
 
-export default function AceEditor({value='', lang='text', onChange, debounce=700, className, wrap=false}: {
+export default function AceEditor({value='', lang='text', onChange, debounce=700, className, wrap=false, readOnly=false}: {
     value?: string,
     lang: 'text'|'json'|'markdown'|'html'|'csv'|'javascript'|'sql',
     onChange: (value: string) => any,
     debounce?: number,
     className?: string,
     wrap?: boolean,
+    readOnly?: boolean,
 }) {
     const containerRef = useRef(null)
     const editorRef = useRef(null)
@@ -27,6 +28,7 @@ export default function AceEditor({value='', lang='text', onChange, debounce=700
             containerRef.current.style.fontSize = '18px'
             editorRef.current = window['ace'].edit(elemId, {})
             editorRef.current.setTheme("ace/theme/textmate");
+            editorRef.current.setReadOnly(readOnly)
             if (onChange) {
                 editorRef.current.session.on('change', _.debounce(() => {
                     const newValue = editorRef.current.getValue()
@@ -43,22 +45,26 @@ export default function AceEditor({value='', lang='text', onChange, debounce=700
                 editorRef.current = null
             }
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         if (editorRef.current && value != lastValueRef.current) {
             lastValueRef.current = value
             editorRef.current.setValue(value)
         }
-    }, [value])
+    }, [value]);
 
     useEffect(() => {
         editorRef.current && editorRef.current.session.setUseWrapMode(wrap);
-    }, [wrap])
+    }, [wrap]);
 
     useEffect(() => {
         editorRef.current && editorRef.current.session.setMode(`ace/mode/${lang}`)
-    }, [lang])
+    }, [lang]);
+
+    useEffect(() => {
+        editorRef.current && editorRef.current.setReadOnly(readOnly)
+    }, [readOnly]);
 
     return <div ref={containerRef} className={`${className}`}></div>
 }

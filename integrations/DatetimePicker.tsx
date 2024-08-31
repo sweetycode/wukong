@@ -38,5 +38,5 @@ export default function DateTimePicker({value, onChange}: {
         }
     }, [value])
 
-    return <input ref={ref} type='text' className="border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block p-2" onChange={e => onChange((e.target as any).value)}/>
+    return <input ref={ref} type='text' className="px-2 py-1 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-600 focus:border-blue-600 block" onChange={e => onChange((e.target as any).value)}/>
 }

@@ -66,7 +66,7 @@ export function useHttpGet(url: string, callback: (body: Object) => any, inputs:
     }, inputs)
 }
 
-export function useHttpBody<T>(url: string, initialState: T|(()=>T), inputs: Inputs): T {
+export function useHttpBody<T>(url: string, initialState: T|(()=>T), inputs?: Inputs): T {
     const [value, setValue] = useState<T>(initialState)
     useHttpGet(url, setValue, inputs)
     return value

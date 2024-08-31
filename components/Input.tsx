@@ -1,37 +1,78 @@
 import type { ComponentChildren } from "preact"
 
-export function Input({value, className, onChange}: {
+export function Input({value, className, onChange, readOnly=false, type="text"}: {
     value: string,
+    className?: string,
+    readOnly?: boolean,
+    type?: 'text'|'number',
+    onChange?: (newValue: string) => any,
+}) {
+    return <input type={type}
+        readOnly={readOnly}
+        className={`border border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+        value={value}
+        onChange={e => onChange&&onChange((e.target as any).value)} />
+}
+
+export function Textarea({value, className, onChange, readOnly=false}: {
+    value: string,
+    className?: string,
+    readOnly?: boolean,
+    onChange?: (newValue: string) => any,
+}) {
+    return <textarea
+        className={`border w-full border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+        value={value}
+        onChange={e => onChange((e.target as any).value)}>
+    </textarea>
+}
+
+export function Select({value, options, className='', onChange}: {
+    value: number|string,
+    options: {value, text}[],
     className?: string,
     onChange: (newValue: string) => any,
 }) {
-    return <input type="text" className={`border border-gray-300 px-1 py-0.5 rounded peer outline-none focus:border-blue-400 ${className}`} value={value} onChange={e => onChange((e.target as any).value)}/>
+    return <select
+        value={value}
+        onChange={e => onChange((e.target as any).value)}
+        className={`border border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+    >
+        {options.map(({value, text}) => <option value={value}>{text}</option>)}
+    </select>
 }
 
-
-export function FloatLabel({label, value, size='base', className, children}: {
+export function FloatLabel({label, value, size='base', className='', labelClassName='', children, fixed=false}: {
     label: string,
     value: string,
     size?: 'small'|'base'|'large',
     className?: string,
+    labelClassName?: string
+    fixed?: boolean
     children: ComponentChildren,
 }) {
+    const disableFloating = fixed || value.length > 0
+    const labelClass = ['absolute left-2 bg-white transition-all text-gray-400',
+        (disableFloating ? 'text-sm -top-3': 'pointer-events-none top-1 peer-focus:pointer-events-auto peer-focus:text-sm peer-focus:-top-3 peer-focus:text-gray-500 peer-active:pointer-events-auto peer-active:text-sm peer-active:-top-3 peer-active:text-gray-500'),
+        labelClassName,
+    ].join(' ');
     return <div className={`relative ${className}`}>
         {children}
-        <label
-            className={`absolute left-1.5 px-0.5 bg-white transition-all ${value.length == 0 ? 'top-0.5 text-gray-700': 'text-gray-500 text-xs -top-2'} peer-focus:text-gray-500 peer-focus:text-xs peer-focus:-top-2 peer-active:text-gray-500 peer-active:text-xs peer-active:-top-2`}
-        >{label}</label>
+        <label className={labelClass}>{label}</label>
     </div>
 }
 
 
-export function LabeledInput({label, value, onChange, className}: {
+export function LabeledInput({label, value, onChange, className='', labelClassName='', inputClassName='', readOnly=false}: {
     label: string,
     value: string,
     onChange: (newValue: string) => any,
-    className?: string
+    className?: string,
+    labelClassName?: string
+    inputClassName?: string,
+    readOnly?: boolean,
 }) {
-    return <FloatLabel label={label} value={value} className={className}>
-        <Input value={value} onChange={onChange} className="w-full"/>
+    return <FloatLabel label={label} value={value} className={className} fixed={readOnly} labelClassName={labelClassName}>
+        <Input value={value} onChange={onChange} className="w-full" readOnly={readOnly}/>
     </FloatLabel>
 }

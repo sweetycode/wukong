@@ -1,6 +1,5 @@
 import { ComponentChildren, createContext } from "preact";
 import { useContext } from "preact/hooks";
-import { Link } from "wouter-preact";
 
 
 export default function Link2({href, children, className='', onClick, raw=true}: {

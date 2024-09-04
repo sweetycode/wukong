@@ -1,4 +1,7 @@
 import type { ComponentChildren } from "preact"
+import clx, { ClassValue, clz } from '../utilities/clx';
+
+export const defaultInputClasses = `py-1.5 px-2 border border-gray-300 rounded peer outline-none`
 
 export function Input({value, className, onChange, readOnly=false, type="text"}: {
     value: string,
@@ -9,7 +12,7 @@ export function Input({value, className, onChange, readOnly=false, type="text"}:
 }) {
     return <input type={type}
         readOnly={readOnly}
-        className={`border border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+        className={clz(defaultInputClasses, className)}
         value={value}
         onChange={e => onChange&&onChange((e.target as any).value)} />
 }
@@ -21,7 +24,7 @@ export function Textarea({value, className, onChange, readOnly=false}: {
     onChange?: (newValue: string) => any,
 }) {
     return <textarea
-        className={`border w-full border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+        className={clz(defaultInputClasses, 'w-full', className)}
         value={value}
         onChange={e => onChange((e.target as any).value)}>
     </textarea>
@@ -36,27 +39,27 @@ export function Select({value, options, className='', onChange}: {
     return <select
         value={value}
         onChange={e => onChange((e.target as any).value)}
-        className={`border border-gray-300 py-1 px-2 rounded peer outline-none ${className}`}
+        className={clz(defaultInputClasses, className)}
     >
         {options.map(({value, text}) => <option value={value}>{text}</option>)}
     </select>
 }
 
-export function FloatLabel({label, value, size='base', className='', labelClassName='', children, fixed=false}: {
+export function FloatLabel({label, value, size='base', className, labelClassName, children, fixed=false}: {
     label: string,
     value: string,
     size?: 'small'|'base'|'large',
-    className?: string,
-    labelClassName?: string
+    className?: ClassValue[],
+    labelClassName?: ClassValue[]
     fixed?: boolean
     children: ComponentChildren,
 }) {
     const disableFloating = fixed || value.length > 0
-    const labelClass = ['absolute left-2 bg-white transition-all text-gray-400',
-        (disableFloating ? 'text-sm -top-3': 'pointer-events-none top-1 peer-focus:pointer-events-auto peer-focus:text-sm peer-focus:-top-3 peer-focus:text-gray-500 peer-active:pointer-events-auto peer-active:text-sm peer-active:-top-3 peer-active:text-gray-500'),
+    const labelClass = clz('absolute left-1.5 px-0.5 bg-white transition-all text-gray-400',
+        (disableFloating ? 'text-sm -top-3': 'pointer-events-none top-[0.3em] peer-focus:pointer-events-auto peer-focus:text-sm peer-focus:-top-3 peer-focus:text-gray-500 peer-active:pointer-events-auto peer-active:text-sm peer-active:-top-3 peer-active:text-gray-500'),
         labelClassName,
-    ].join(' ');
-    return <div className={`relative ${className}`}>
+    );
+    return <div className={clz('relative', className)}>
         {children}
         <label className={labelClass}>{label}</label>
     </div>

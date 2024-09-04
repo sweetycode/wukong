@@ -1,17 +1,19 @@
 import { ComponentChild, ComponentChildren } from "preact";
 import Link2 from "../components/Link2";
+import { ClassValue, clz } from '../utilities/clx';
 
 export interface NavbarLink {
     text: string
     href: string
 }
 
-export function Navbar({name, links, logo}: {
+export function Navbar({name, links, logo, className}: {
     name: string,
     links: NavbarLink[],
     logo: ComponentChild,
+    className: ClassValue[],
 }) {
-    return <nav className="max-w-4xl p-4 mx-auto flex max-md:flex-wrap justify-between">
+    return <nav className={clz('max-w-4xl p-4 mx-auto flex max-md:flex-wrap justify-between', className)}>
         {/* toggle button */}
         <div className="flex md:hidden">
             <button className="">

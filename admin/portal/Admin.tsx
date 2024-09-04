@@ -7,9 +7,6 @@ import { AdminNavbar, Container } from "./Blocks";
 import { httpPost, httpPut } from "../../utilities/http";
 import { useHttpBody } from "../../components/hooks";
 import Table, { TableRow } from "../../components/Table";
-import { IconLink } from "./Controls";
-import { IconList, IconPlus } from "../../icons/IconFonts";
-import { Link2Node } from "../../components/Link2";
 
 
 const builtinFields = {
@@ -96,13 +93,11 @@ function AdminApp({base, resources}: {
 function HomePage() {
     const resources = useHttpBody('/admin/api/stats', [])
     return <Container>
-        <Table headers={['resource', 'count', 'action']}>
-            {resources.map(({resource, count}) => <TableRow>{[
-                resource, count, <div className="space-x-3">
-                    <IconLink href={`/${resource}`}><IconList size="30"/></IconLink>
-                    <IconLink href={`/${resource}/create`}><IconPlus size="30"/></IconLink>
-                </div>
-            ]}</TableRow>)}
+        <Table headers={['resource', 'count']}>
+            {resources.map(({resource, count}) => <TableRow>
+                <Link className="text-gray-700 hover:text-blue-500" href={`/${resource}`}>{resource}</Link>
+                {count}
+            </TableRow>)}
         </Table>
     </Container>
 }

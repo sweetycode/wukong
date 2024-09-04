@@ -4,7 +4,6 @@ import { Entity, Resource, ViewType } from './types';
 import { IconLink } from "./Controls";
 import { IconPlus } from '../../icons/IconFonts';
 import CodeDisplay from '../../integrations/CodeDisplay';
-import { codeToHtml } from 'shiki';
 import Table, { TableRow } from '../../components/Table';
 
 

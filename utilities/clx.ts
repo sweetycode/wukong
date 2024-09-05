@@ -28,9 +28,11 @@ function _dedup(className: string): string {
     const bm = new PseudoBitmap()
     const res: string[] = []
     className.split(' ').reverse().forEach(clazz => {
-        const [pseudo, pureClazz] = PseudoBitmap.splitPseudo(clazz)
-        const radix = mapClassToRadix(pureClazz)
-        if (!bm.check(pseudo, radix)) {
+        const [pseudo, attrName] = PseudoBitmap.splitPseudo(clazz)
+        const radix = mapClassToRadix(attrName)
+        if (radix == 0) {  // all unconfigured attributes
+            res.push(clazz)
+        } else if (!bm.check(pseudo, radix)) {
             res.push(clazz)
             bm.set(pseudo, radix)
         }
@@ -120,9 +122,21 @@ const SIZES = new Set(['xs', 'sm', 'base', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl
 
 // padding,margin
 classMapper(/^(?:-)?p-/)
-classMapper(/^(?:-)?p[a-z]-/)
+classMapper(/^(?:-)?px-/)
+classMapper(/^(?:-)?py-/)
+classMapper(/^(?:-)?pt-/)
+classMapper(/^(?:-)?pr-/)
+classMapper(/^(?:-)?pb-/)
+classMapper(/^(?:-)?pl-/)
+
 classMapper(/^(?:-)?m-/)
-classMapper(/^(?:-)?m[a-z]-/)
+classMapper(/^(?:-)?mx-/)
+classMapper(/^(?:-)?my-/)
+classMapper(/^(?:-)?mt-/)
+classMapper(/^(?:-)?mr-/)
+classMapper(/^(?:-)?mb-/)
+classMapper(/^(?:-)?ml-/)
+
 
 
 // width,height

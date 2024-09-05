@@ -1,7 +1,7 @@
 import { FloatLabel, LabeledInput, Select, Textarea } from '../../components/Input';
 import { IconEdit, IconEye } from '../../icons/IconFonts';
 import { IconLink} from './Controls';
-import { Field, FieldProps, ViewType } from './types';
+import type{ Field, FieldProps, ViewType } from './types';
 import { useFullscreenToggleState, useHttpBody } from '../../components/hooks';
 import _ from '../../utilities/dash';
 import AceEditor from '../../integrations/AceEditor';

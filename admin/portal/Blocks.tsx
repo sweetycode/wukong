@@ -1,7 +1,7 @@
-import { ComponentChildren } from "preact";
-import { Resource, ViewType } from "./types";
+import type { ComponentChildren } from "preact";
+import type { Resource, ViewType } from "./types";
 import _ from '../../utilities/dash';
-import Breadcrumb, { BreadcrumbLink } from "../../blocks/Breadcrumb";
+import Breadcrumb, { type BreadcrumbLink } from "../../blocks/Breadcrumb";
 import { Link, useParams } from "wouter-preact";
 import { Navbar } from '../../blocks/Navbar';
 import { Link2Node } from "../../components/Link2";

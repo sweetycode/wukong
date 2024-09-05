@@ -1,5 +1,5 @@
 import { render } from "preact";
-import { Field, HandleSubmit, Resource } from './types';
+import type { Field, HandleSubmit, Resource } from './types';
 import { Link, Route, Router } from "wouter-preact";
 import { BelongsToField, BelongsToManyField, HtmlField, IdField, ImageField, MarkdownField, StringField, TextField, TimestampField, hideViews } from './Fields';
 import { ResourceRoutes } from "./Routes";
@@ -91,7 +91,7 @@ function AdminApp({base, resources}: {
 
 
 function HomePage() {
-    const resources = useHttpBody('/admin/api/stats', [])
+    const resources = useHttpBody(`/admin/api/stats`, [])
     return <Container>
         <Table headers={['resource', 'count']}>
             {resources.map(({resource, count}) => <TableRow>

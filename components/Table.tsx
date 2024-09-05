@@ -1,5 +1,5 @@
-import {ComponentChild, ComponentChildren } from "preact"
-import { ClassValue, clz } from "../utilities/clx"
+import type {ComponentChild, ComponentChildren } from "preact"
+import { type ClassValue, clz } from "../utilities/clx"
 
 export default function Table({headers, children, className}: {
     headers: string[],

@@ -1,10 +1,10 @@
-import { useLocation, useParams, Link } from 'wouter-preact';
+import { useLocation, useParams } from 'wouter-preact';
 import { useHttpBody, useObjectState } from '../../components/hooks';
-import { Entity, Resource, ViewType } from './types';
+import type { Entity, Resource, ViewType } from './types';
 import { IconLink } from "./Controls";
 import { IconPlus } from '../../icons/IconFonts';
-import CodeDisplay from '../../integrations/CodeDisplay';
 import Table, { TableRow } from '../../components/Table';
+import {SimpleJsonViewer} from '../../integrations/simplejsonview/index';
 
 
 function useResourceEntity(name: string, id: number|string) {
@@ -114,20 +114,7 @@ function FormView({resource, view, entity, editing, updateEditing, handleSubmit}
         <div className="flex justify-end">
             <button className="px-1.5 py-1 rounded bg-blue-500 text-white hover:bg-blue-600" onClick={handleSubmit}>Submit</button>
         </div>
-        <JsonDisplay editing={editing} className="p-4 border border-gray-200 rounded"/>
+        <SimpleJsonViewer value={editing} className="p-4 border border-gray-200 rounded"/>
     </div>
 }
 
-
-function JsonDisplay({editing, className=''}: {editing: Entity, className?: string}) {
-    return <CodeDisplay code={JSON.stringify(editing, null, 2)} className={className} codeToHtml={async (code) => {
-        return codeToHtml(code, {
-            lang: 'json', theme: 'light-plus',
-            transformers: [{
-                pre(node) {
-                    this.addClassToHast(node, 'text-wrap')
-                }
-            }],
-        })
-    }} />
-}

@@ -1,6 +1,6 @@
-import { ComponentChild, ComponentChildren } from "preact";
+import type { ComponentChild, ComponentChildren } from "preact";
 import Link2 from "../components/Link2";
-import { ClassValue, clz } from '../utilities/clx';
+import { type ClassValue, clz } from '../utilities/clx';
 
 export interface NavbarLink {
     text: string

@@ -1,5 +1,5 @@
 import { Route, Switch } from "wouter-preact"
-import { Resource, ViewType } from "./types"
+import type { Resource, ViewType } from "./types"
 import { CreateView, EditView, ListView, ShowView } from "./Views"
 import { AdminBreadcrumb, Container } from "./Blocks"
 

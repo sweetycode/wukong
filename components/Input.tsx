@@ -1,7 +1,7 @@
 import type { ComponentChildren } from "preact"
-import clx, { ClassValue, clz } from '../utilities/clx';
+import { clz } from '../utilities/clx';
 
-export const defaultInputClasses = `py-1.5 px-2 border border-gray-300 rounded peer outline-none`
+export const defaultInputClasses = `py-1.5 px-2 border border-gray-300 rounded peer outline-none min-w-24`
 
 export function Input({value, className, onChange, readOnly=false, type="text"}: {
     value: string,
@@ -56,7 +56,7 @@ export function FloatLabel({label, value, size='base', className, labelClassName
 }) {
     const disableFloating = fixed || value.length > 0
     const labelClass = clz('absolute left-1.5 px-0.5 bg-white transition-all text-gray-400',
-        (disableFloating ? 'text-sm -top-3': 'pointer-events-none top-[0.3em] peer-focus:pointer-events-auto peer-focus:text-sm peer-focus:-top-3 peer-focus:text-gray-500 peer-active:pointer-events-auto peer-active:text-sm peer-active:-top-3 peer-active:text-gray-500'),
+        (disableFloating ? 'text-sm -top-3': 'pointer-events-none top-[0.3em] peer-focus:pointer-events-auto peer-focus:text-sm peer-focus:-top-3 peer-active:pointer-events-auto peer-active:text-sm peer-active:-top-3'),
         labelClassName,
     );
     return <div className={clz('relative', className)}>

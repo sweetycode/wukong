@@ -28,9 +28,11 @@ function _dedup(className: string): string {
     const bm = new PseudoBitmap()
     const res: string[] = []
     className.split(' ').reverse().forEach(clazz => {
-        const [pseudo, attrName] = PseudoBitmap.splitPseudo(clazz)
+        const [pseudo, attrName, deletion] = PseudoBitmap.splitPseudo(clazz)
         const radix = mapClassToRadix(attrName)
-        if (radix == 0) {  // all unconfigured attributes
+        if (deletion) {
+            bm.set(pseudo, radix)
+        } else if (radix == 0) {  // all unconfigured attributes
             res.push(clazz)
         } else if (!bm.check(pseudo, radix)) {
             res.push(clazz)
@@ -44,12 +46,14 @@ function _dedup(className: string): string {
 class PseudoBitmap {
     bitmaps = new Map<string, Bitmap>()
 
-    static splitPseudo(clazz: string): [string, string] {
+    static splitPseudo(clazz: string): [string, string, boolean] {
+        let deletion = clazz.charAt(0) == '~'
+        clazz = deletion ? clazz.substring(1): clazz
         let index = clazz.lastIndexOf(':')
         if (index > 0) {
-            return [clazz.substring(0, index), clazz.substring(index + 1)]
+            return [clazz.substring(0, index), clazz.substring(index + 1), deletion]
         } else {
-            return ['', clazz]
+            return ['', clazz, deletion]
         }
     }
 
@@ -164,7 +168,7 @@ classMapper(/^bg-([a-z]+)/, match => COLORS.has(match[1]))
 
 
 // display
-classMapper(/^(?:(?:inline-)?(?:block|flex|table|grid))|inline|flex|table|grid|hidden|list-item|table-cell|table-column$/)
+classMapper(/^(inline-block|block|inline-flex|flex|inline-table|table|inline-grid|grid|inline|flex|table|grid|hidden|list-item|table-cell|table-column)$/)
 classMapper(/^(?:static|fixed|absolute|relative|sticky)$/)
 classMapper('overflow-')
 

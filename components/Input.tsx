@@ -47,10 +47,10 @@ export function Select({value, options, className='', onChange}: {
 
 export function FloatLabel({label, value, size='base', className, labelClassName, children, fixed=false}: {
     label: string,
-    value: string,
+    value?: string,
     size?: 'small'|'base'|'large',
-    className?: ClassValue[],
-    labelClassName?: ClassValue[]
+    className?: string,
+    labelClassName?: string
     fixed?: boolean
     children: ComponentChildren,
 }) {
@@ -69,7 +69,7 @@ export function FloatLabel({label, value, size='base', className, labelClassName
 export function LabeledInput({label, value, onChange, className='', labelClassName='', inputClassName='', readOnly=false}: {
     label: string,
     value: string,
-    onChange: (newValue: string) => any,
+    onChange?: (newValue: string) => any,
     className?: string,
     labelClassName?: string
     inputClassName?: string,

@@ -1,4 +1,4 @@
-import { httpGet } from "@wukong/utilities/http"
+import { httpGet } from "@vx/admin/portal/http"
 import { addEscKeyListener } from "../utilities/dom"
 import { useEffect, useState, type Dispatch, type Inputs, type StateUpdater } from "preact/hooks"
 
@@ -57,17 +57,4 @@ export function useFullscreenToggleState(initialState: boolean|(() => boolean) =
             return newValue
         })
     ]
-}
-
-
-export function useHttpGet(url: string, callback: (body: Object) => any, inputs: Inputs = []) {
-    useEffect(() => {
-        httpGet(url).then(callback)
-    }, inputs)
-}
-
-export function useHttpBody<T>(url: string, initialState: T|(()=>T), inputs?: Inputs): T {
-    const [value, setValue] = useState<T>(initialState)
-    useHttpGet(url, setValue, inputs)
-    return value
 }

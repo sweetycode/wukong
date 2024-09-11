@@ -1,4 +1,4 @@
-import { IconExitFullscreen, IconFullscreen } from "@wukong/icons/IconImages"
+import { IconExitFullscreen, IconFullscreen, IconNoWrap, IconWrap } from "@wukong/icons/IconImages"
 import type { ComponentChild } from "preact"
 import TooltipButton from "./Tooltip"
 
@@ -32,5 +32,16 @@ export function toolbarItemFullscreen({fullscreen, toggleFullscreen}) {
         tooltip: fullscreen? 'Exit fullscreen': 'Fullscreen',
         icon: fullscreen? <IconExitFullscreen size="24"/>:<IconFullscreen size="24"/>,
         onClick: toggleFullscreen,
+    }
+}
+
+export function toolbarItemWrap({wrap, toggleWrap}: {
+    wrap: boolean,
+    toggleWrap: () => void
+}) {
+    return {
+        tooltip: wrap? 'Nowrap': 'Wrap',
+        icon: wrap? <IconNoWrap size="24"/> : <IconWrap size="24"/>,
+        onClick: toggleWrap,
     }
 }

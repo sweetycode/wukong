@@ -1,7 +1,6 @@
-import type { SimpleLink } from "@wukong/components/types";
 import { env } from "@wukong/utilities/environ";
 
-export default function Footer({sentence, links}: {sentence: string, links: SimpleLink[]}) {
+export default function Footer({sentence, links}: {sentence: string, links: {text: string, href: string}[]}) {
     return <footer class="p-4 md:p-8 lg:p-10">
         <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8"/>
         <div class="mx-auto max-w-4xl text-center px-4"> 

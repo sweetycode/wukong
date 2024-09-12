@@ -1,4 +1,4 @@
-import { type ComponentChildren, createContext } from "preact";
+import { type ComponentChildren, createContext, type FunctionComponent } from "preact";
 import { useContext } from "preact/hooks";
 
 
@@ -15,4 +15,4 @@ export default function Link2({href, children, className='', onClick, raw=true}:
         : <Node href={href} className={className}>{children}</Node>
 }
 
-export const Link2Node = createContext<Function|null>(null)
+export const Link2Node = createContext<FunctionComponent<{href: string, className?: string}>|null>(null)

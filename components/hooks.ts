@@ -1,4 +1,3 @@
-import { httpGet } from "@vx/admin/portal/http"
 import { addEscKeyListener } from "../utilities/dom"
 import { useEffect, useState, type Dispatch, type Inputs, type StateUpdater } from "preact/hooks"
 

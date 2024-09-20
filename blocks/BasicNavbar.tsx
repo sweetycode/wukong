@@ -1,12 +1,18 @@
 import type { ComponentChildren } from "preact";
-import { clz } from '../utilities/clx';
+import { applyStyleMixer, type StyleMixer } from "@wukong/stylemixer/stylemixer";
 
 
-export default function BasicNavbar({logo, className}: {
+const basicNavbarStyles = {
+    containerStyle: `mx-auto flex p-4 justify-center`,
+    logoStyle: `flex items-center`,
+}
+
+export default function BasicNavbar({logo, mixer}: {
     logo: ComponentChildren,
-    className?: string,
+    mixer?: StyleMixer<typeof basicNavbarStyles>
 }) {
-    return <nav className={clz('mx-auto flex justify-center', className)}>
-        <a href="/" className="flex items-center">{logo}</a>
+    const styles = applyStyleMixer(basicNavbarStyles, mixer)
+    return <nav className={styles.containerStyle}>
+        <a href="/" className={styles.logoStyle}>{logo}</a>
     </nav>
 }

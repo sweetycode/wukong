@@ -1,4 +1,4 @@
-import { injectScript } from "@wukong/utilities/dom";
+import { injectScript } from "../utilities/dom";
 
 const emojiMapping = {
     'no': 10060,

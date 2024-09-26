@@ -1,4 +1,4 @@
-import { injectScript, injectStyle } from "@wukong/utilities/dom"
+import { injectScript, injectStyle } from "../utilities/dom"
 import type { ComponentChildren } from "preact"
 import { useEffect, useRef } from "preact/hooks"
 

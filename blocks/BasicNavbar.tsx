@@ -1,5 +1,5 @@
 import type { ComponentChildren } from "preact";
-import { applyStyleMixer, type StyleMixer } from "@wukong/stylemixer/stylemixer";
+import { applyStyleMixer, type StyleMixer } from "../stylemixer/stylemixer";
 
 
 const basicNavbarStyles = {

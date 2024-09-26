@@ -1,4 +1,4 @@
-import { env } from "@wukong/utilities/environ";
+import { env } from "../utilities/environ";
 
 export default function Footer({sentence, links}: {sentence: string, links: {text: string, href: string}[]}) {
     return <footer class="p-4 md:p-8 lg:p-10">

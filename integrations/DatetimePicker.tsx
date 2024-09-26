@@ -1,4 +1,4 @@
-import { injectScript, injectStyle } from "@wukong/utilities/dom"
+import { injectScript, injectStyle } from "../utilities/dom"
 import { useEffect, useRef } from "preact/hooks"
 import { defaultInputClasses } from "../components/Input";
 import { clz } from "../utilities/clx";

@@ -1,6 +1,6 @@
-import _ from "@wukong/utilities/dash"
+import _ from "../utilities/dash"
 import { useEffect, useRef } from "preact/hooks"
-import { injectScript, injectStyle } from "@wukong/utilities/dom"
+import { injectScript, injectStyle } from "../utilities/dom"
 
 export async function injectAceScripts() {
     injectStyle('https://cdn.jsdelivr.net/npm/ace-builds@1.35.2/css/ace.min.css')

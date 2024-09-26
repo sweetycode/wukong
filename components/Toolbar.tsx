@@ -1,7 +1,7 @@
-import { IconExitFullscreen, IconFullscreen, IconNoWrap, IconWrap } from "@wukong/icons/IconImages"
+import { IconExitFullscreen, IconFullscreen, IconNoWrap, IconWrap } from "../icons/IconImages"
 import type { ComponentChild } from "preact"
 import TooltipButton from "./Tooltip"
-import { applyStyleMixer, type StyleMixer } from "@wukong/stylemixer/stylemixer"
+import { applyStyleMixer, type StyleMixer } from "../stylemixer/stylemixer"
 
 export type ToolbarItem = {
     icon: ComponentChild,
